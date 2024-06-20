@@ -23,6 +23,8 @@ const useMovies = () => {
             }
             return lastPage.page + 1;
         },
+        staleTime: 300000,
+        cacheTime: 600000,
     });
 };
 
