@@ -39,14 +39,16 @@ const Home: React.FC = () => {
         fetchMovies();
     }, [fetchMovies]);
 
-    const { ref } = useInView({
+    const { ref, inView } = useInView({
         threshold: 1,
-        onChange: (inView) => {
-            if (inView && hasMore) {
-                setPage(prevPage => prevPage + 1);
-            }
-        },
+        triggerOnce: false,
     });
+
+    useEffect(() => {
+        if (inView && hasMore && !loading) {
+            setPage(prevPage => prevPage + 1);
+        }
+    }, [inView, hasMore, loading]);
 
     return (
         <Box p={4}>
