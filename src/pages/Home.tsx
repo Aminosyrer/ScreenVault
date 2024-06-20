@@ -17,7 +17,7 @@ const Home: React.FC = () => {
         setLoading(true);
         try {
             const response = await axios.get<Movie[]>(`${import.meta.env.VITE_API_URL}/Movie`, {
-                params: { page, limit: 10 },
+                params: { page, limit: 5 },
             });
 
             if (response.data.length === 0) {
