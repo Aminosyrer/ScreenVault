@@ -1,6 +1,7 @@
+// src/pages/MovieDetail.tsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Heading, Text, Image, List, ListItem, Spinner, Center } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, Image, List, ListItem, Center, Spinner } from '@chakra-ui/react';
 import axios from 'axios';
 
 interface Movie {
@@ -32,30 +33,47 @@ const MovieDetail: React.FC = () => {
     }, [id]);
 
     if (!movie) {
-        return <Center><Spinner p={4} size="xl"/></Center>;
+        return <Center><Spinner p={4} size="xl" /></Center>;
     }
 
     return (
         <Box p={4}>
-            <Heading>{movie.title}</Heading>
-            <Text>{movie.description}</Text>
-            <Image src={movie.posterUrl} alt={movie.title} />
-            <Text>Release Year: {movie.releaseYear}</Text>
-            <Text>Genres: {movie.genres.join(', ')}</Text>
-            <Heading size="md" mt={4}>Cast</Heading>
-            <List spacing={3}>
-                {movie.cast.map((member, index) => (
-                    <ListItem key={index}>
-                        {member.actorName} as {member.characterName}
-                    </ListItem>
-                ))}
-            </List>
-            {movie.trailerUrl && (
-                <Box mt={4}>
-                    <Heading size="md">Trailer</Heading>
-                    <a href={movie.trailerUrl} target="_blank" rel="noopener noreferrer">Watch Trailer</a>
+            <Flex direction={{ base: 'column', md: 'row' }} align="flex-start">
+                <Box flexShrink={0} mr={{ base: 0, md: 4 }} mb={{ base: 4, md: 0 }}>
+                    <Image
+                        src={movie.posterUrl}
+                        alt={movie.title}
+                        fallbackSrc="https://placehold.co/600x400?text=Placeholder"
+                        width="400px"
+                        height="650px"
+                        objectFit="cover"
+                    />
                 </Box>
-            )}
+                <Box>
+                    <Heading>{movie.title}</Heading>
+                    <Heading size="md" mt={4}>Description</Heading>
+                    <Text mb={4}>{movie.description}</Text>
+                    <Heading size="md" mt={4}>Released</Heading>
+                    <Text>{movie.releaseYear}</Text>
+                    <Heading size="md" mt={4}>Genres</Heading>
+                    <Text>{movie.genres.join(', ')}</Text>
+                    <Heading size="md" mt={4}>Cast</Heading>
+                    <List spacing={3} mb={4}>
+                        {movie.cast.map((member, index) => (
+                            <ListItem key={index}>
+                                {member.actorName} as {member.characterName}
+                            </ListItem>
+                        ))}
+                    </List>
+                    {movie.trailerUrl && (
+                        <Box mt={4}>
+                            <Heading size="md">
+                                <a href={movie.trailerUrl} target="_blank" rel="noopener noreferrer">Watch Trailer</a>
+                            </Heading>
+                        </Box>
+                    )}
+                </Box>
+            </Flex>
         </Box>
     );
 };

@@ -18,7 +18,7 @@ const MovieCard: React.FC<MovieProps> = ({ movie }) => {
                 <Image
                     src={movie.posterUrl}
                     alt={movie.title}
-                    fallbackSrc="https://placehold.co/600x400?text=Hello+World"
+                    fallbackSrc="https://placehold.co/600x400?text=Placeholder"
                     boxSize="200px"
                     objectFit="cover"
                     width="100%"
