@@ -1,7 +1,6 @@
-// src/pages/MovieDetail.tsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Flex, Heading, Text, Image, List, ListItem, Center, Spinner } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, Image, List, ListItem, Center, Spinner, Link } from '@chakra-ui/react';
 import axios from 'axios';
 
 interface Movie {
@@ -41,26 +40,26 @@ const MovieDetail: React.FC = () => {
             <Flex direction={{ base: 'column', md: 'row' }} align="flex-start">
                 <Box flexShrink={0} mr={{ base: 0, md: 4 }} mb={{ base: 4, md: 0 }}>
                     <Image
-                        src={movie.posterUrl}
+                        src={movie.posterUrl || 'https://placehold.co/100x300?text=Placeholder'}
                         alt={movie.title}
-                        fallbackSrc="https://placehold.co/600x400?text=Placeholder"
                         width="400px"
                         height="650px"
                         objectFit="cover"
+                        borderRadius="lg"
                     />
                 </Box>
-                <Box>
-                    <Heading>{movie.title}</Heading>
-                    <Heading size="md" mt={4}>Description</Heading>
-                    <Text mb={4}>{movie.description}</Text>
-                    <Heading size="md" mt={4}>Released</Heading>
-                    <Text>{movie.releaseYear}</Text>
-                    <Heading size="md" mt={4}>Genres</Heading>
-                    <Text>{movie.genres.join(', ')}</Text>
-                    <Heading size="md" mt={4}>Cast</Heading>
+                <Box color="black">
+                    <Heading color="black">{movie.title}</Heading>
+                    <Heading size="md" mt={4} color="black">Description</Heading>
+                    <Text mb={4} color="black">{movie.description}</Text>
+                    <Heading size="md" mt={4} color="black">Released</Heading>
+                    <Text color="black">{movie.releaseYear}</Text>
+                    <Heading size="md" mt={4} color="black">Genres</Heading>
+                    <Text color="black">{movie.genres.join(', ')}</Text>
+                    <Heading size="md" mt={4} color="black">Cast</Heading>
                     <List spacing={3} mb={4}>
                         {movie.cast.map((member, index) => (
-                            <ListItem key={index}>
+                            <ListItem key={index} color="black">
                                 {member.actorName} as {member.characterName}
                             </ListItem>
                         ))}
@@ -68,7 +67,9 @@ const MovieDetail: React.FC = () => {
                     {movie.trailerUrl && (
                         <Box mt={4}>
                             <Heading size="md">
-                                <a href={movie.trailerUrl} target="_blank" rel="noopener noreferrer">Watch Trailer</a>
+                                <Link href={movie.trailerUrl} target="_blank" rel="noopener noreferrer" color="teal.500">
+                                    Watch Trailer
+                                </Link>
                             </Heading>
                         </Box>
                     )}

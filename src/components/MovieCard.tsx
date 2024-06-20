@@ -1,34 +1,29 @@
 import React from 'react';
-import { Box, Heading, Text, Image } from '@chakra-ui/react';
+import { Card, CardBody, Heading, Image, Text } from '@chakra-ui/react';
+import { Movie } from '../entities/Movie';
 import { Link } from 'react-router-dom';
 
-interface MovieProps {
-    movie: {
-        id: number;
-        title: string;
-        description: string;
-        posterUrl: string;
-    };
+interface Props {
+    movie: Movie;
 }
 
-const MovieCard: React.FC<MovieProps> = ({ movie }) => {
+const MovieCard: React.FC<Props> = ({ movie }) => {
     return (
-        <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
-            <Link to={`/movies/${movie.id}`}>
+        <Link to={`/movies/${movie.id}`}>
+            <Card maxW="sm" borderRadius="lg" overflow="hidden" boxShadow="lg">
                 <Image
-                    src={movie.posterUrl}
+                    src={movie.posterUrl || 'https://placehold.co/100x300?text=Placeholder'}
                     alt={movie.title}
-                    fallbackSrc="https://placehold.co/600x400?text=Placeholder"
-                    boxSize="200px"
                     objectFit="cover"
-                    width="100%"
+                    h="400px"
+                    w="100%"
                 />
-                <Box p={4} maxH="200px" overflow="hidden">
-                    <Heading size="md" noOfLines={1}>{movie.title}</Heading>
+                <CardBody>
+                    <Heading fontSize="xl" noOfLines={1}>{movie.title}</Heading>
                     <Text mt={2} noOfLines={2}>{movie.description}</Text>
-                </Box>
-            </Link>
-        </Box>
+                </CardBody>
+            </Card>
+        </Link>
     );
 };
 
