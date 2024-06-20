@@ -1,4 +1,3 @@
-// src/pages/Home.tsx
 import React, { useEffect, useState, useCallback } from 'react';
 import { SimpleGrid, Box, Heading, Spinner, Center } from '@chakra-ui/react';
 import axios from 'axios';
