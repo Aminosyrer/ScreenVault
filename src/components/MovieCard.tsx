@@ -15,7 +15,14 @@ const MovieCard: React.FC<MovieProps> = ({ movie }) => {
     return (
         <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
             <Link to={`/movies/${movie.id}`}>
-                <Image src={movie.posterUrl} alt={movie.title} />
+                <Image
+                    src={movie.posterUrl}
+                    alt={movie.title}
+                    fallbackSrc="https://via.placeholder.com/150"
+                    boxSize="200px"
+                    objectFit="cover"
+                    width="100%"
+                />
                 <Box p={4}>
                     <Heading size="md">{movie.title}</Heading>
                     <Text mt={2}>{movie.description}</Text>

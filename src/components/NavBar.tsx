@@ -4,7 +4,7 @@ import { Box, Flex, Link, Button } from "@chakra-ui/react";
 
 const Navbar: React.FC = () => {
     return (
-        <Box bg="lightcoral" p={4}>
+        <Box bg="darkslategray" p={4}>
             <Flex as="nav" justify="space-between" align="center">
                 <Link as={RouterLink} to="/" fontSize="xl" color="white">
                     ScreenVault
