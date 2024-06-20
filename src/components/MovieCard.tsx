@@ -18,14 +18,14 @@ const MovieCard: React.FC<MovieProps> = ({ movie }) => {
                 <Image
                     src={movie.posterUrl}
                     alt={movie.title}
-                    fallbackSrc="https://via.placeholder.com/150"
+                    fallbackSrc="https://placehold.co/600x400?text=Hello+World"
                     boxSize="200px"
                     objectFit="cover"
                     width="100%"
                 />
-                <Box p={4}>
-                    <Heading size="md">{movie.title}</Heading>
-                    <Text mt={2}>{movie.description}</Text>
+                <Box p={4} maxH="200px" overflow="hidden">
+                    <Heading size="md" noOfLines={1}>{movie.title}</Heading>
+                    <Text mt={2} noOfLines={2}>{movie.description}</Text>
                 </Box>
             </Link>
         </Box>

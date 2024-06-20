@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Heading, Text, Image, List, ListItem } from '@chakra-ui/react';
+import { Box, Heading, Text, Image, List, ListItem, Spinner, Center } from '@chakra-ui/react';
 import axios from 'axios';
 
 interface Movie {
@@ -32,7 +32,7 @@ const MovieDetail: React.FC = () => {
     }, [id]);
 
     if (!movie) {
-        return <Text>Loading...</Text>;
+        return <Center><Spinner p={4} size="xl"/></Center>;
     }
 
     return (

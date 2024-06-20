@@ -4,10 +4,10 @@ import { Box, Flex, Link, Button } from "@chakra-ui/react";
 
 const Navbar: React.FC = () => {
     return (
-        <Box bg="darkslategray" p={4}>
+        <Box bg="steelblue" p={4}>
             <Flex as="nav" justify="space-between" align="center">
                 <Link as={RouterLink} to="/" fontSize="xl" color="white">
-                    ScreenVault
+                    Screen Vault
                 </Link>
                 <Box>
                     <Link as={RouterLink} to="/login" mr={4} color="white">
