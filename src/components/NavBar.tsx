@@ -29,7 +29,6 @@ const NavBar: React.FC = () => {
                                     colorScheme="blue.500"
                                     variant="solid"
                                     color="white"
-                                    _hover={{ bg: "blue" }}
                                 >
                                     Login
                                 </Button>
@@ -39,7 +38,6 @@ const NavBar: React.FC = () => {
                                     colorScheme="blue.500"
                                     variant="ghost"
                                     color="white"
-                                    _hover={{ bg: "blue" }}
                                 >
                                     Register
                                 </Button>
@@ -52,7 +50,6 @@ const NavBar: React.FC = () => {
                                 colorScheme="blue.500"
                                 variant="solid"
                                 color="white"
-                                _hover={{ bg: "blue" }}
                             >
                                 Logout
                             </Button>
