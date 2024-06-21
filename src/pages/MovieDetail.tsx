@@ -48,18 +48,18 @@ const MovieDetail: React.FC = () => {
                         borderRadius="lg"
                     />
                 </Box>
-                <Box color="black">
-                    <Heading color="black">{movie.title}</Heading>
-                    <Heading size="md" mt={4} color="black">Description</Heading>
-                    <Text mb={4} color="black">{movie.description}</Text>
-                    <Heading size="md" mt={4} color="black">Released</Heading>
-                    <Text color="black">{movie.releaseYear}</Text>
-                    <Heading size="md" mt={4} color="black">Genres</Heading>
-                    <Text color="black">{movie.genres.join(', ')}</Text>
-                    <Heading size="md" mt={4} color="black">Cast</Heading>
+                <Box>
+                    <Heading>{movie.title}</Heading>
+                    <Heading size="md" mt={4}>Description</Heading>
+                    <Text mb={4}>{movie.description}</Text>
+                    <Heading size="md" mt={4}>Released</Heading>
+                    <Text>{movie.releaseYear}</Text>
+                    <Heading size="md" mt={4}>Genres</Heading>
+                    <Text>{movie.genres.join(', ')}</Text>
+                    <Heading size="md" mt={4}>Cast</Heading>
                     <List spacing={3} mb={4}>
                         {movie.cast.map((member, index) => (
-                            <ListItem key={index} color="black">
+                            <ListItem key={index}>
                                 {member.actorName} as {member.characterName}
                             </ListItem>
                         ))}

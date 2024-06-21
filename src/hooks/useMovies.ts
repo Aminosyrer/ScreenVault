@@ -8,15 +8,16 @@ interface PaginatedResponse {
     results: Movie[];
 }
 
-const fetchMovies = async ({ pageParam = 1 }) => {
+const fetchMovies = async ({ pageParam = 1, queryKey }: { pageParam?: number, queryKey: any }) => {
+    const [_key, genre] = queryKey;
     const response = await axios.get<PaginatedResponse>(`${import.meta.env.VITE_API_URL}/Movie`, {
-        params: { page: pageParam, limit: 10 },
+        params: { page: pageParam, limit: 10, genre },
     });
     return response.data;
 };
 
-const useMovies = () => {
-    return useInfiniteQuery('movies', fetchMovies, {
+const useMovies = (genre: string) => {
+    return useInfiniteQuery(['movies', genre], fetchMovies, {
         getNextPageParam: (lastPage) => {
             if (lastPage.results.length === 0) {
                 return undefined;
