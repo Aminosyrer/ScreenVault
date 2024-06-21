@@ -1,14 +1,21 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 interface ProtectedRouteProps {
-    component: React.ComponentType;
+    element: React.ReactNode;
+    requiredRole?: string;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ component: Component }) => {
-    const isAuthenticated = Boolean(localStorage.getItem("token"));
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element, requiredRole }) => {
+    const { isAuthenticated, role } = useAuth();
 
-    return isAuthenticated ? <Component /> : <Navigate to="/login" />;
+    if (!isAuthenticated || (requiredRole && role !== requiredRole)) {
+        return <Navigate to="/" />;
+    }
+
+    return element;
+
 };
 
 export default ProtectedRoute;
