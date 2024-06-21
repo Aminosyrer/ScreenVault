@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, Spinner, Text, Button } from "@chakra-ui/react";
+import { Box, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
@@ -6,15 +6,20 @@ import MovieCardContainer from "./MovieCardContainer";
 import InfiniteScroll from "react-infinite-scroll-component";
 import React from "react";
 
-const MovieGrid = () => {
+interface Props {
+    selectedGenres: string[];
+}
+
+const MovieGrid: React.FC<Props> = ({ selectedGenres }) => {
+    const genre = selectedGenres.join(',');
     const {
         error,
         data,
         isLoading,
-        isFetchingNextPage,
         fetchNextPage,
         hasNextPage,
-    } = useMovies();
+    } = useMovies(genre);
+
     const skeletons = [...Array(10).keys()];
 
     const fetchedMoviesCount =
@@ -47,11 +52,6 @@ const MovieGrid = () => {
                         </React.Fragment>
                     ))}
                 </SimpleGrid>
-                {hasNextPage && (
-                    <Button onClick={() => fetchNextPage()} marginY={5}>
-                        {isFetchingNextPage ? "Loading..." : "Load more"}
-                    </Button>
-                )}
             </Box>
         </InfiniteScroll>
     );
