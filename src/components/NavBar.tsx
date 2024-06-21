@@ -1,28 +1,64 @@
-import React from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { Box, Flex, Link, Button } from "@chakra-ui/react";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Box, Flex, Button, HStack, Heading } from '@chakra-ui/react';
+import { useAuth } from '../context/AuthContext';
 
-const Navbar: React.FC = () => {
+const NavBar: React.FC = () => {
+    const { isAuthenticated, role, logout } = useAuth();
+
     return (
-        <Box bg="steelblue" p={4}>
-            <Flex as="nav" justify="space-between" align="center">
-                <Link as={RouterLink} to="/" fontSize="xl" color="white">
+        <Box bg="blue.500" p={4} color="white">
+            <Flex justify="space-between" align="center">
+                <Heading size="md">
+                <Link to="/">
                     Screen Vault
                 </Link>
-                <Box>
-                    <Link as={RouterLink} to="/login" mr={4} color="white">
-                        Login
-                    </Link>
-                    <Link as={RouterLink} to="/register" mr={4} color="white">
-                        Register
-                    </Link>
-                    <Link as={RouterLink} to="/admin">
-                        <Button colorScheme="teal">Admin Dashboard</Button>
-                    </Link>
-                </Box>
+                </Heading>
+                <Flex>
+                    {isAuthenticated && role === "admin" && (
+                        <Button as={Link} to="/admin" mr={4}>
+                            Dashboard
+                        </Button>
+                    )}
+                    <HStack spacing={4}>
+                        {!isAuthenticated ? (
+                            <>
+                                <Button
+                                    as={Link}
+                                    to="/login"
+                                    colorScheme="blue.500"
+                                    variant="solid"
+                                    color="white"
+                                >
+                                    Login
+                                </Button>
+                                <Button
+                                    as={Link}
+                                    to="/register"
+                                    colorScheme="blue.500"
+                                    variant="ghost"
+                                    color="white"
+                                >
+                                    Register
+                                </Button>
+                            </>
+                        ) : (
+                            <Button
+                                onClick={() => {
+                                    logout();
+                                }}
+                                colorScheme="blue.500"
+                                variant="solid"
+                                color="white"
+                            >
+                                Logout
+                            </Button>
+                        )}
+                    </HStack>
+                </Flex>
             </Flex>
         </Box>
     );
 };
 
-export default Navbar;
+export default NavBar;
