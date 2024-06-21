@@ -15,10 +15,14 @@ jobs:
       - name: Fetch Vercel Deployment URL
         id: get_deployment_url
         run: |
-          DEPLOYMENT_URL=$(curl -s -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
-          "https://api.vercel.com/v6/deployments?projectId=${{ secrets.VERCEL_PROJECT_ID }}&meta-git-branch=${{ github.head_ref }}&state=READY" \
-          | jq -r '.deployments[0].url')
+          echo "Fetching Vercel Deployment URL..."
+          RESPONSE=$(curl -s -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+          "https://api.vercel.com/v6/deployments?projectId=${{ secrets.VERCEL_PROJECT_ID }}&meta-git-branch=${{ github.head_ref }}&state=READY")
+          echo "Response: $RESPONSE"
+          DEPLOYMENT_URL=$(echo $RESPONSE | jq -r '.deployments[0].url')
+          echo "Fetched URL: $DEPLOYMENT_URL"
           echo "DEPLOYMENT_URL=https://$DEPLOYMENT_URL" >> $GITHUB_ENV
+          echo "Deployment URL set to: https://$DEPLOYMENT_URL"
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
